@@ -1,24 +1,32 @@
-import { type } from 'os';
+import React from 'react';
 import copyImg from '../assets/images/copy.svg';
 
 import '../styles/roomCode.scss';
 
 type RoomCodeProps = {
-    code: string;
-}
+  code: string;
+};
 
-export function RoomCode(props: RoomCodeProps) {
-    function copyRoomCodeToClipboard() {
-        navigator.clipboard.writeText(props.code);
-    }
+const RoomCode: React.FC<RoomCodeProps> = (props: RoomCodeProps) => {
+  const { code } = props;
 
-    return (
-        <button onClick={copyRoomCodeToClipboard} className="room-code">
-            <div>
-                <img src={copyImg} alt="Botão para copiar códfio da sala" />
-            </div>
+  function copyRoomCodeToClipboard() {
+    navigator.clipboard.writeText(props.code);
+  }
 
-            <span>Sala #{props.code}</span>
-        </button>
-    )
-}
+  return (
+    <button
+      type="button"
+      onClick={copyRoomCodeToClipboard}
+      className="room-code"
+    >
+      <div>
+        <img src={copyImg} alt="Botão para copiar códfio da sala" />
+      </div>
+
+      <span>Sala #{code}</span>
+    </button>
+  );
+};
+
+export default RoomCode;
